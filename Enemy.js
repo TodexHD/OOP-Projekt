@@ -114,6 +114,7 @@ class Enemy {
             circle(this.x, this.y, this.r * 0.995);
             circle(this.x, this.y, this.r * 0.99);
             circle(this.x, this.y, this.r * 0.985);
+            circle(this.x, this.y, this.r * 0.98);
             let image = new Image();
             image.src = this.src;
             ctx.drawImage(image, this.x, this.y - this.r, this.r * 2, this.r * 2);

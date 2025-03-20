@@ -21,7 +21,7 @@ class Ball {
         }
         if (keypress_shift && this.shrink > 0) {
             this.vx = this.run;
-            this.shrink -= 1;
+            this.shrink -= 0.75;
         } else this.vx = this.run * 0.5;
         this.draw();
     }
