@@ -52,9 +52,9 @@ class Ball {
             }
         }
 
-        if (f1.y - this.y <= this.r) {
-            this.touching_floor = false;
-        }
+        // if (f1.y - this.y <= this.r) {
+        //     this.touching_floor = false;
+        // }
 
         this.y += this.vy;
 
