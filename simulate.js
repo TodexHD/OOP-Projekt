@@ -43,44 +43,45 @@ window.addEventListener("keydown", keypressed);
 window.addEventListener("keyup", keyup);
 
 function keypressed(event) {
-    if (event.key === "w") {
+    if (event.keyCode == 87) {
         keypress_w = true;
         ar.spawn();
     }
-    if (event.key === "a") {
+    if (event.keyCode == 65) {
         keypress_a = true;
     }
-    if (event.key === "s") {
+    if (event.keyCode == 83) {
         keypress_s = true;
     }
-    if (event.key === "d") {
+    if (event.keyCode == 68) {
         keypress_d = true;
     }
-    if (event.key === " ") {
+    if (event.keyCode == 32) {
         keypress_space = true;
     }
-    if (event.key === "Shift") {
+    if (event.keyCode == 16) {
         keypress_shift = true;
     }
 }
 
 function keyup(event) {
-    if (event.key === "w") {
+    console.log(event.keyCode);
+    if (event.keyCode == 87) {
         keypress_w = false;
     }
-    if (event.key === "a") {
+    if (event.keyCode == 65) {
         keypress_a = false;
     }
-    if (event.key === "s") {
+    if (event.keyCode == 83) {
         keypress_s = false;
     }
-    if (event.key === "d") {
+    if (event.keyCode == 68) {
         keypress_d = false;
     }
-    if (event.key === " ") {
+    if (event.keyCode == 32) {
         keypress_space = false;
     }
-    if (event.key === "Shift") {
+    if (event.keyCode == 16) {
         keypress_shift = false;
     }
 }

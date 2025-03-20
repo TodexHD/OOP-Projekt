@@ -63,6 +63,8 @@ class Enemy {
             if (y > ar.y - ar.h) {
                 console.log("hit");
                 if (this.r > xmax * 0.014) {
+                    var audio = new Audio("Öhhhh.m4a");
+                    audio.play();
                     this.children.push(
                         new Enemy(this.x + (this.r / Math.sqrt(2)) * 0.6, this.y, this.r / Math.sqrt(2), "", this.depth + 1, this.vx + 2, this.vy * 0.8),
 
