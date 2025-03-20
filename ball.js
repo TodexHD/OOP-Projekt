@@ -10,6 +10,7 @@ class Ball {
         this.vy = vy;
         this.def_r = this.r;
         this.shrink = 100;
+        this.run = 2 * this.vx;
     }
     move() {
         if (keypress_a) {
@@ -18,18 +19,24 @@ class Ball {
         if (keypress_d) {
             this.x += this.vx;
         }
+        if (keypress_shift && this.shrink > 0) {
+            this.vx = this.run;
+            this.shrink -= 1;
+        } else this.vx = this.run * 0.5;
         this.draw();
     }
 
     fall() {
         this.move();
         if (keypress_space) {
-            if (this.touching_floor == true) {
-                this.vy -= 6;
+            if (this.touching_floor && this.shrink > 0) {
+                this.vy -= ymax / 1100;
+                console.log("hello");
+                this.shrink -= 2;
             }
         }
 
-        const a = 0.5;
+        const a = ymax / 1500;
         this.vy += a;
         if (f1.y - this.y <= this.r) {
             if (this.vy > 0) {
@@ -38,7 +45,14 @@ class Ball {
                 this.touching_floor = true;
             }
         }
-        if (f1.y - this.y > this.r) {
+        if (this.y + f2.y <= this.r - f2.y + f2.h) {
+            if (this.vy < 0) {
+                this.vy = -0;
+                this.y = f2.y + this.r + f2.h;
+            }
+        }
+
+        if (f1.y - this.y <= this.r) {
             this.touching_floor = false;
         }
 
@@ -57,7 +71,9 @@ class Ball {
         if (keypress_s && this.shrink > 0) {
             this.r = xmax * 0.01;
             this.shrink -= 1;
-            console.log(this.shrink);
+            if (this.shrink <= 0) {
+                keypress_s = false;
+            }
         }
 
         if (!keypress_s) {

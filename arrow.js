@@ -33,6 +33,6 @@ class Arrow {
 
     draw() {
         setFillColor("black");
-        fillRect(this.x * 0.995, this.y, this.x * 0.005, -this.h);
+        fillRect(this.x * 0.995, this.y, xmax * 0.003, -this.h);
     }
 }

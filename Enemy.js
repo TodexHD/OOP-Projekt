@@ -68,6 +68,8 @@ class Enemy {
 
                         new Enemy(this.x - (this.r / Math.sqrt(2)) * 0.6, this.y, this.r / Math.sqrt(2), "", this.depth + 1, this.vx - 2, this.vy * 0.8)
                     );
+                    b3.shrink += 25;
+                    if (b3.shrink > 100) b3.shrink = 100;
                 }
                 this.show = false;
             }
@@ -78,6 +80,11 @@ class Enemy {
         if (this.show) {
             setFillColor(this.color);
             fillCircle(this.x, this.y, this.r);
+            setFillColor("black");
+            circle(this.x, this.y, this.r);
+            circle(this.x, this.y, this.r * 0.995);
+            circle(this.x, this.y, this.r * 0.99);
+            circle(this.x, this.y, this.r * 0.985);
             let image = new Image();
             image.src = this.src;
             ctx.drawImage(image, this.x, this.y - this.r, this.r * 2, this.r * 2);
