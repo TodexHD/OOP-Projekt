@@ -1,17 +1,19 @@
 class Enemy {
     touching_floor = false;
-    constructor(x, y, r, src, color, vx, vy) {
+    constructor(x, y, r, src, depth, vx, vy) {
+        let colors = ["#901bcf", "#1500ff", "#15ff00", "#ffff00", "#ffa200", "#ff0000", "#ff00aa"];
         this.x = x;
         this.y = y;
         this.r = r;
         this.src = src;
-        this.color = color;
+        this.depth = depth;
+        this.color = colors[depth];
         this.vx = vx;
         this.vy = vy;
         this.invincible = true;
         this.children = [];
         this.show = true;
-        setTimeout(() => (this.invincible = false), 2000);
+        setTimeout(() => (this.invincible = false), 2500);
     }
 
     fall() {
@@ -32,14 +34,18 @@ class Enemy {
         this.vy += a;
 
         if (f1.y - this.y <= this.r) {
-            if (this.vy > 0) {
-                this.vy = -this.vy;
-                this.y = f1.y - this.r;
-                this.touching_floor = true;
-            }
+            this.vy = -this.vy * 0.977;
+            this.y = f1.y - this.r;
         }
-        if (f1.y - this.y > this.r) {
-            this.touching_floor = false;
+
+        if (this.x - w1.x <= this.r + w1.w) {
+            this.vx = -this.vx;
+            this.x = w1.x + this.r + w1.w;
+        }
+
+        if (w2.x - this.x <= this.r - w2.w) {
+            this.vx = -this.vx;
+            this.x = w2.x - this.r + w2.w;
         }
 
         this.y += this.vy;
@@ -56,11 +62,11 @@ class Enemy {
             let y = Math.sqrt(this.r ** 2 - (ar.x - this.x) ** 2) + this.y;
             if (y > ar.y - ar.h) {
                 console.log("hit");
-                if (this.r > 10) {
+                if (this.r > xmax * 0.014) {
                     this.children.push(
-                        new Enemy(this.x, this.y, this.r / 2, "", "red", this.vx + 2, this.vy * 0.8),
+                        new Enemy(this.x + (this.r / Math.sqrt(2)) * 0.6, this.y, this.r / Math.sqrt(2), "", this.depth + 1, this.vx + 2, this.vy * 0.8),
 
-                        new Enemy(this.x, this.y, this.r / 2, "", "red", this.vx - 2, this.vy * 0.8)
+                        new Enemy(this.x - (this.r / Math.sqrt(2)) * 0.6, this.y, this.r / Math.sqrt(2), "", this.depth + 1, this.vx - 2, this.vy * 0.8)
                     );
                 }
                 this.show = false;

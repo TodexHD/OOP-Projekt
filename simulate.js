@@ -1,14 +1,11 @@
-b1 = new Ball(300, 300, 50, "elsaglaze.jpg", "#FF000000", 0, 0);
-b2 = new Ball(800, 300, 100, "loris.jpeg", "#FF000000");
-b3 = new Ball(400, 200, 50, "", "blue", 0, 0);
+b3 = new Ball(xmax * 0.25, ymax, 0.03 * xmax, "", "black", xmax * 0.003, 0);
 ar = new Arrow(b3.x, b3.y, -20);
-f1 = new Floor(0, ymax - 20, 2000, 20, "red");
-f2 = new Floor(0, 0, 2000, 30, "red");
-w1 = new Wall(0, 0, 30, ymax, "red");
-w1 = new Wall(xmax, 0, 30, ymax, "red");
-e1 = new Enemy(200, 200, 50, "", "red", 2, 0);
-b1.draw();
-b2.draw();
+f1 = new Floor(0, ymax * 0.98, xmax, 0.015 * xmax, "red");
+f2 = new Floor(0, 0, xmax, 0.01 * xmax, "red");
+w1 = new Wall(0, 0, 0.015 * xmax, ymax, "red");
+w2 = new Wall(xmax, 0, -0.015 * xmax, ymax, "red");
+e1 = new Enemy(xmax * 0.7, ymax * 0.3, xmax * 0.1, "", 0, xmax * 0.0025, 0);
+h1 = new Shrink(100, 100, 400, 200, "green");
 b3.draw();
 e1.draw();
 ar.draw();
@@ -17,14 +14,14 @@ setInterval(tick, 20);
 
 function tick() {
     clearScreen();
-    //b1.fall();
-    //b2.move();
     b3.fall();
     f1.draw();
     f2.draw();
     w1.draw();
+    w2.draw();
     e1.fall();
     ar.rise();
+    h1.draw();
 }
 
 var keypress_w = false;

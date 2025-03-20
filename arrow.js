@@ -12,9 +12,8 @@ class Arrow {
         if (this.y - this.h <= f2.y + f2.h) {
             this.h = this.y - f2.y - f2.h;
             setTimeout(this.reset.bind(this), 1000);
-        }
-        else {
-            const a = 10;
+        } else {
+            const a = ymax * 0.02;
             this.h += a;
         }
         this.draw();
@@ -27,13 +26,13 @@ class Arrow {
         this.y = b3.y - b3.r;
     }
 
-    reset(){
+    reset() {
         this.h = 0;
         this.show = false;
     }
 
     draw() {
         setFillColor("black");
-        fillRect(this.x - 5, this.y, 5, -this.h);
+        fillRect(this.x * 0.995, this.y, this.x * 0.005, -this.h);
     }
 }
