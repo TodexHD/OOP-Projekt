@@ -10,11 +10,8 @@ i1 = new Icon(xmax * 0.03, ymax * 0.09, xmax * 0.0275, "shrink.png", "shrink_use
 i2 = new Icon(xmax * 0.095, ymax * 0.09, xmax * 0.0275, "ballrun.png", "ballrun_use.png");
 i3 = new Icon(xmax * 0.16, ymax * 0.09, xmax * 0.0275, "balljump.png", "balljump_use.png");
 i4 = new Icon(xmax * 0.225, ymax * 0.09, xmax * 0.0275, "ballshoot.png", "ballshoot_use.png");
-b3.draw();
-e1.draw();
-ar.draw();
 
-setInterval(tick, 20);
+let IntervalID = setInterval(tick, 20);
 
 function tick() {
     clearScreen();
@@ -30,6 +27,7 @@ function tick() {
     i2.drawRun();
     i3.drawJump();
     i4.drawShoot();
+    if (!e1.alive) clearInterval(IntervalID);
 }
 
 var keypress_w = false;
@@ -41,6 +39,7 @@ var keypress_shift = false;
 
 window.addEventListener("keydown", keypressed);
 window.addEventListener("keyup", keyup);
+window.addEventListener("click", onclick);
 
 function keypressed(event) {
     if (event.keyCode == 87) {
@@ -61,6 +60,9 @@ function keypressed(event) {
     }
     if (event.keyCode == 16) {
         keypress_shift = true;
+    }
+    if (event.keyCode == 82 && !e1.alive) {
+        location.reload();
     }
 }
 
@@ -84,4 +86,8 @@ function keyup(event) {
     if (event.keyCode == 16) {
         keypress_shift = false;
     }
+}
+
+function onclick(event) {
+    if (Math.abs(event.x - xmax / 2) <= xmax / 6 && Math.abs(event.y - ymax / 1.55) <= ymax / 16 && !e1.alive) location.reload();
 }

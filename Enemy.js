@@ -1,5 +1,6 @@
 class Enemy {
     touching_floor = false;
+    alive = true;
     constructor(x, y, r, src, depth, vx, vy) {
         let colors = ["#901bcf", "#1500ff", "#15ff00", "#ffff00", "#ffa200", "#ff0000", "#ff00aa"];
         this.x = x;
@@ -26,10 +27,6 @@ class Enemy {
         if (!this.show) return;
         this.hit();
 
-        if (Math.sqrt((b3.x - this.x) ** 2 + (b3.y - this.y) ** 2) <= this.r + b3.r) {
-            alert("Game Over");
-        }
-
         const a = 0.1;
         this.vy += a;
 
@@ -52,6 +49,36 @@ class Enemy {
         this.x += this.vx;
 
         this.draw();
+
+        if (Math.sqrt((b3.x - this.x) ** 2 + (b3.y - this.y) ** 2) <= this.r + b3.r) {
+            this.alive = false;
+            ctx.textAlign = "center"; // horizontal center
+            ctx.textBaseline = "middle"; // vertical center
+            ctx.lineWidth = 20; // Set the outline thickness
+            ctx.strokeStyle = "black"; // Set outline color
+            setFillColor("#0b8a2c");
+            fillRectCenter(xmax / 2, ymax / 2, xmax / 2, ymax / 2);
+            setFillColor("black");
+            setLineWidth(10);
+            rectCenter(xmax / 2, ymax / 2, xmax / 2, ymax / 2);
+            setFillColor("#424242");
+            fillRectCenter(xmax / 2, ymax / 1.55, xmax / 3, ymax / 8);
+            setFillColor("black");
+            rectCenter(xmax / 2, ymax / 2, xmax / 2, ymax / 2);
+            setFillColor("black");
+            ctx.font = xmax / 20 + "px Arial";
+            setLineWidth(5);
+            ctx.strokeText("Restart", xmax / 2, ymax / 1.53);
+            ctx.fillText("Restart", xmax / 2, ymax / 1.53);
+            setFillColor("red");
+            ctx.font = xmax / 14 + "px Arial";
+            ctx.fillText("Game", xmax / 2, ymax / 2.7);
+            ctx.strokeText("Game", xmax / 2, ymax / 2.7);
+            ctx.fillText("Over", xmax / 2, ymax / 1.95);
+            ctx.strokeText("Over", xmax / 2, ymax / 1.95);
+            setLineWidth(1);
+            this.alive = false;
+        }
     }
 
     hit() {
