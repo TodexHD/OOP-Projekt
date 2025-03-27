@@ -1,6 +1,6 @@
 class Enemy {
     touching_floor = false;
-    static remaining = 63;
+    static remaining = 127;
     constructor(x, y, r, src, depth, vx, vy) {
         let colors = ["#901bcf", "#1500ff", "#15ff00", "#ffff00", "#ffa200", "#ff0000", "#ff00aa"];
         this.x = x;
@@ -63,8 +63,8 @@ class Enemy {
             let y = Math.sqrt(this.r ** 2 - (ar.x - this.x) ** 2) + this.y;
             if (y > ar.y - ar.h) {
                 console.log("hit");
+                Enemy.remaining -= 1;
                 if (this.r > xmax * 0.014) {
-                    Enemy.remaining -= 1;
                     console.log(Enemy.remaining);
                     var audio = new Audio("Öhhhh.m4a");
                     audio.play();
