@@ -11,6 +11,7 @@ class Ball {
         this.def_r = this.r;
         this.shrink = 100;
         this.run = 2 * this.vx;
+        this.alive = true;
     }
     move() {
         if (keypress_a) {
@@ -21,7 +22,7 @@ class Ball {
         }
         if (keypress_shift && this.shrink > 0) {
             this.vx = this.run;
-            this.shrink -= 1;
+            this.shrink -= 0.75;
         } else this.vx = this.run * 0.5;
         this.draw();
     }

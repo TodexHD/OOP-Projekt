@@ -63,10 +63,18 @@ Profidokumentation: https://www.w3schools.com/html/html5_canvas.asp and https://
 var xmax, ymax;
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-xmax = window.innerWidth; // globale Variable, Fensterbreite
-ymax = window.innerHeight; // globale Variable, Fensterhöhe
-
-fullScreen(); // sorgt dafür, dass die Canvas das ganze Browserfenster ausfüllt
+function screening() {
+    if (window.innerHeight * (16 / 9) <= window.innerWidth) {
+        xmax = window.innerHeight * (16 / 9); // globale Variable, Fensterbreite
+        ymax = window.innerHeight; // globale Variable, Fensterhöhe
+    } else {
+        xmax = window.innerWidth;
+        ymax = window.innerWidth * (9 / 16);
+    }
+    fullScreen();
+}
+screening();
+window.addEventListener("resize", screening);
 
 //Dreiecke ***************************************************************************
 function fillTriangle(x1, y1, x2, y2, x3, y3) {
@@ -404,9 +412,7 @@ function clearScreen() {
 }
 
 function fullScreen() {
-    xmax = window.innerWidth;
     ctx.canvas.width = xmax;
-    ymax = window.innerHeight;
     ctx.canvas.height = ymax;
 }
 
